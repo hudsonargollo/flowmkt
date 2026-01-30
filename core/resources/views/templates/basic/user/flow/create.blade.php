@@ -5,9 +5,10 @@
     </div>
 @endsection
 
-@viteReactRefresh
-
-@vite(['resources/js/flow_builder/app.jsx'])
+@push('script')
+    @viteReactRefresh
+    @vite(['resources/js/flow_builder/app.jsx'])
+@endpush
 
 @push('style')
     <style>
