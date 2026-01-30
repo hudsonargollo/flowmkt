@@ -57,3 +57,6 @@ deployment_backup_*
 
 # Database files with secrets
 install/database.sql
+
+# Laravel marketplace directory (duplicate of core/)
+Laravel/
