@@ -23,22 +23,48 @@ try {
     
     // Translation map for common phrases
     $translations = [
-        // Main headings
+        // Main headings - EXACT matches from screenshot
         'Grow Your Business with WhatsApp CRM and Marketing Tools' => 'Expanda Seu Negócio com CRM WhatsApp e Ferramentas de Marketing',
         'How It Works?' => 'Como Funciona?',
+        'How it Works?' => 'Como Funciona?',
+        'Como Funciona?' => 'Como Funciona?',
         "Here's What You Get" => 'Aqui Está o Que Você Recebe',
         'Simple and Transparent Pricing' => 'Preços Simples e Transparentes',
         'Trusted Thousands of Businesses' => 'Confiado por Milhares de Empresas',
+        'Trusted by Thousands of Businesses' => 'Confiado por Milhares de Empresas',
         'Take Your Business Anywhere' => 'Leve Seu Negócio Para Qualquer Lugar',
         'Answers to Common Questions' => 'Respostas Para Perguntas Comuns',
         'Get Started with FlowMkt' => 'Comece com FlowMkt',
         'Our Latest Blog' => 'Nosso Blog Mais Recente',
         
-        // Common words
+        // Sections visible in screenshot
+        'About FlowMkt and What We Offer' => 'Sobre o FlowMkt e O Que Oferecemos',
+        'Connect with Millions of Customers' => 'Conecte-se com Milhões de Clientes',
+        'Take Your Business to the Next Level' => 'Leve Seu Negócio Para o Próximo Nível',
+        'Grow Your Business' => 'Expanda Seu Negócio',
+        'Connect with FlowMkt Today' => 'Conecte-se com FlowMkt Hoje',
+        'Get Started Today' => 'Comece Hoje',
+        
+        // Common words and phrases
         'Create campaigns, automate chats, manage contacts—all from one powerful dashboard.' => 'Crie campanhas, automatize conversas, gerencie contatos—tudo em um painel poderoso.',
+        'Manage all your WhatsApp conversations in one place' => 'Gerencie todas as suas conversas do WhatsApp em um só lugar',
+        'Send bulk messages to thousands of contacts instantly' => 'Envie mensagens em massa para milhares de contatos instantaneamente',
+        'Track your campaign performance with detailed analytics' => 'Acompanhe o desempenho de suas campanhas com análises detalhadas',
+        'Automate responses and save time' => 'Automatize respostas e economize tempo',
+        'Build custom chatbots without coding' => 'Crie chatbots personalizados sem programação',
+        'Organize contacts with tags and segments' => 'Organize contatos com tags e segmentos',
+        'Schedule messages for optimal delivery times' => 'Agende mensagens para horários ideais de entrega',
+        'Get real-time notifications and alerts' => 'Receba notificações e alertas em tempo real',
+        
+        // Button text
         'Get Started for Free' => 'Comece Gratuitamente',
+        'Get Started Free' => 'Comece Gratuitamente',
+        'Start Free Trial' => 'Iniciar Teste Grátis',
+        'Try It Free' => 'Experimente Grátis',
         'Login' => 'Entrar',
         'Create Free Account' => 'Criar Conta Grátis',
+        'Create Account' => 'Criar Conta',
+        'Sign Up Free' => 'Cadastre-se Grátis',
         'Home' => 'Início',
         'Features' => 'Recursos',
         'Pricing' => 'Preços',
@@ -192,6 +218,47 @@ try {
                 echo "  - $detail\n";
             }
             echo "\n";
+        }
+        
+        // Show remaining English content
+        echo "=== CHECKING FOR REMAINING ENGLISH CONTENT ===\n\n";
+        $stmt = $conn->query("SELECT id, data_keys, data_values FROM frontends");
+        $frontends = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $englishPatterns = [
+            '/\b(the|and|with|for|your|our|get|all|from|what|how|why|when|where|who)\b/i',
+            '/\b(business|marketing|customer|message|campaign|contact|chat|feature|pricing|blog)\b/i',
+            '/\b(started|create|manage|send|track|automate|build|organize|schedule)\b/i'
+        ];
+        
+        $remainingEnglish = [];
+        foreach ($frontends as $frontend) {
+            $content = $frontend['data_values'];
+            foreach ($englishPatterns as $pattern) {
+                if (preg_match($pattern, $content)) {
+                    // Extract a sample of English text
+                    preg_match_all('/[A-Z][a-z]+(?: [A-Z]?[a-z]+){2,10}/', $content, $matches);
+                    if (!empty($matches[0])) {
+                        $samples = array_slice(array_unique($matches[0]), 0, 3);
+                        $remainingEnglish[$frontend['data_keys']] = $samples;
+                    }
+                    break;
+                }
+            }
+        }
+        
+        if (!empty($remainingEnglish)) {
+            echo "⚠️ Found English content in " . count($remainingEnglish) . " sections:\n\n";
+            foreach ($remainingEnglish as $key => $samples) {
+                echo "Section: $key\n";
+                foreach ($samples as $sample) {
+                    echo "  - \"$sample\"\n";
+                }
+                echo "\n";
+            }
+            echo "You may need to add these phrases to the translation map.\n\n";
+        } else {
+            echo "✓ No obvious English patterns detected\n\n";
         }
         
         // Clear ALL caches aggressively
