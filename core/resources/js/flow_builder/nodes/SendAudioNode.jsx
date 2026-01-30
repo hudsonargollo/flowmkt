@@ -2,6 +2,7 @@ import { useState } from "react";
 import NodeWrapper from "./NodeWrapper.jsx";
 import { Position } from "reactflow";
 import { uploadMedia } from "../uploadMedia.js";
+import { t } from "../app.jsx";
 
 export default function SendAudioNode({ id, data, setNodes }) {
     const handles = data.handles || [
@@ -10,7 +11,7 @@ export default function SendAudioNode({ id, data, setNodes }) {
     ];
 
     const [audioFile, setAudioFile] = useState(
-        data.audio || { name: "No audio selected", url: null }
+        data.audio || { name: t("No audio selected"), url: null }
     );
     const [isRequesting, setIsRequesting] = useState(false);
 
@@ -49,7 +50,7 @@ export default function SendAudioNode({ id, data, setNodes }) {
             setNodes={setNodes}
             title={
                 <h6 className="mb-0">
-                    <i className="las la-microphone"></i> Send Audio
+                    <i className="las la-microphone"></i> {t("Send Audio")}
                 </h6>
             }
             content={
@@ -60,8 +61,8 @@ export default function SendAudioNode({ id, data, setNodes }) {
                         ) : (
                             <span style={{ color: "#999" }}>
                                 {isRequesting
-                                    ? "Uploading..."
-                                    : "No audio selected"}
+                                    ? t("Uploading...")
+                                    : t("No audio selected")}
                             </span>
                         )}
                     </div>

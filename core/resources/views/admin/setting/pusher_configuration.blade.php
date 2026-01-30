@@ -36,7 +36,7 @@
 @endsection
 
 @push('breadcrumb-plugins')
-    <a href="https://preview.ovosolution.com/ovowpp/documentation/#pusher-setting" target="_blank" class="btn btn-outline--success">
+    <a href="https://flow.clubemkt.digital" target="_blank" class="btn btn-outline--success">
         <i class="las la-info"></i> @lang('Documentations')
     </a>
 @endpush

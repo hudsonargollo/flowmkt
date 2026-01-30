@@ -1,4 +1,16 @@
 <?php
+/**
+ * FlowMkt Brand Color Configuration
+ * 
+ * This file dynamically generates CSS custom properties based on the primary brand color.
+ * 
+ * FlowMkt Brand Colors:
+ * - Primary: #6366f1 (Modern Indigo) - Used for primary actions, links, and brand elements
+ * - Secondary: Derived from primary color with adjusted lightness
+ * 
+ * The color can be customized via the admin panel (General Settings > Site Primary Color)
+ * or passed as a URL parameter: color.php?color=6366f1
+ */
 header("Content-Type:text/css");
 function checkHexColor($color)
 {
@@ -8,7 +20,7 @@ if (isset($_GET['color']) and $_GET['color'] != '') {
     $color = "#" . $_GET['color'];
 }
 if (!$color or !checkHexColor($color)) {
-    $color = "#336699";
+    $color = "#6366f1"; // FlowMkt brand primary color - Modern indigo
 }
 
 function hexToHsl($hex)

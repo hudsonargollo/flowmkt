@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Schema;
 
 function systemDetails()
 {
-    $system['name']                = 'ovowpp';
+    $system['name']                = 'flowmkt';
     $system['web_version']         = '1.8';
     $system['admin_panel_version'] = '1.0.1';
     $system['mobile_app_version']  = '1.8';

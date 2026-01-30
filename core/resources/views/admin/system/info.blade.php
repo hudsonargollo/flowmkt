@@ -26,7 +26,7 @@
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap ps-0">
                             <span class="flex-align gap-2">
                                 <x-admin.svg.ovo />
-                                <span class="text--secondary">@lang('OvoPanel Version')</span>
+                                <span class="text--secondary">@lang('FlowMkt Panel Version')</span>
                             </span>
                             <span class="fw-500">{{ $systemDetails['admin_panel_version'] }}</span>
                         </li>

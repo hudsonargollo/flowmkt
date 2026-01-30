@@ -25,6 +25,83 @@ import SendCtaUrl from "./nodes/SendCtaUrl";
 import SendButtonNode from "./nodes/SendButtonNode";
 import axios from "axios";
 
+// Portuguese translation dictionary
+const translations = {
+    // Node types
+    "Text Message": "Mensagem de Texto",
+    "Send Image": "Enviar Imagem",
+    "Video Message": "Mensagem de Vídeo",
+    "Send Video": "Enviar Vídeo",
+    "Document Message": "Mensagem de Documento",
+    "Send Document": "Enviar Documento",
+    "Audio Message": "Mensagem de Áudio",
+    "Send Audio": "Enviar Áudio",
+    "List Message": "Mensagem de Lista",
+    "Interactive List": "Lista Interativa",
+    "URL Message": "Mensagem de URL",
+    "Location Message": "Mensagem de Localização",
+    "Send Location": "Enviar Localização",
+    "Button Message": "Mensagem de Botão",
+    "Send Template": "Enviar Template",
+    
+    // Node descriptions
+    "Send a simple text message to the user.": "Enviar uma mensagem de texto simples para o usuário.",
+    "Send an image message to the user.": "Enviar uma mensagem de imagem para o usuário.",
+    "Send a video file as a message.": "Enviar um arquivo de vídeo como mensagem.",
+    "Send a document or file to the user.": "Enviar um documento ou arquivo para o usuário.",
+    "Send an audio clip or voice message.": "Enviar um clipe de áudio ou mensagem de voz.",
+    "Send a structured list message with options.": "Enviar uma mensagem de lista estruturada com opções.",
+    "Send a call-to-action message containing a URL.": "Enviar uma mensagem de chamada para ação contendo uma URL.",
+    "Share a location pin with the user.": "Compartilhar um pin de localização com o usuário.",
+    "Make conditional choices with a interactive buttons.": "Fazer escolhas condicionais com botões interativos.",
+    
+    // Actions and buttons
+    "Add Node": "Adicionar Nó",
+    "Save Flow": "Salvar Fluxo",
+    "Update Flow": "Atualizar Fluxo",
+    "Cancel": "Cancelar",
+    "Save": "Salvar",
+    "Add Button": "Adicionar Botão",
+    "Add node as a step": "Adicionar nó como uma etapa",
+    "Drag and drop to add node": "Arraste e solte para adicionar nó",
+    
+    // Placeholders
+    "Type your message here...": "Digite sua mensagem aqui...",
+    "Enter message body...": "Digite o corpo da mensagem...",
+    "Enter footer text...": "Digite o texto do rodapé...",
+    "Flow Name": "Nome do Fluxo",
+    "Enter Flow Name": "Digite o Nome do Fluxo",
+    "Latitude": "Latitude",
+    "Longitude": "Longitude",
+    "Value for": "Valor para",
+    
+    // Status messages
+    "Uploading...": "Enviando...",
+    "No Image Selected": "Nenhuma Imagem Selecionada",
+    "No video selected": "Nenhum vídeo selecionado",
+    "No audio selected": "Nenhum áudio selecionado",
+    "No document selected": "Nenhum documento selecionado",
+    "No data found": "Nenhum dado encontrado",
+    
+    // Labels
+    "Buttons (max 3)": "Botões (máx 3)",
+    "Button": "Botão",
+    "Preview": "Visualizar",
+    "Header Variables": "Variáveis do Cabeçalho",
+    "Body Variables": "Variáveis do Corpo",
+    
+    // Error messages
+    "Please enter a flow name.": "Por favor, digite um nome para o fluxo.",
+    "The button label cannot exceed 20 characters.": "O rótulo do botão não pode exceder 20 caracteres.",
+    "The button body cannot exceed 1024 characters.": "O corpo do botão não pode exceder 1024 caracteres.",
+    "The footer text cannot exceed 60 characters.": "O texto do rodapé não pode exceder 60 caracteres.",
+};
+
+// Translation helper function
+export const t = (key) => {
+    return translations[key] || key;
+};
+
 const INNER_HEIGHT = window.innerHeight / 2 - 340;
 
 var triggerType = "new_message";
@@ -166,7 +243,7 @@ function FlowBuilder() {
 
     const handleModalSubmit = () => {
         if (!flowName.trim())
-            return notify("error", "Please enter a flow name.");
+            return notify("error", t("Please enter a flow name."));
         const data = {
             nodes,
             edges,
@@ -227,7 +304,7 @@ function FlowBuilder() {
                         className="top_btn"
                         data-bs-toggle="tooltip"
                         data-bs-placement="left"
-                        data-bs-title={isEditing ? "Update Flow" : "Save Flow"}
+                        data-bs-title={isEditing ? t("Update Flow") : t("Save Flow")}
                     >
                         <i className="las la-save"></i>
                     </button>
@@ -237,7 +314,7 @@ function FlowBuilder() {
                         className="top_btn"
                         data-bs-toggle="tooltip"
                         data-bs-placement="left"
-                        data-bs-title="Add node as a step"
+                        data-bs-title={t("Add node as a step")}
                     >
                         <i className="las la-plus"></i>
                     </button>
@@ -249,13 +326,13 @@ function FlowBuilder() {
             />
             <div className={`flow_modal ${showModal ? "show" : ""}`}>
                 <div>
-                    <h5>Enter Flow Name</h5>
+                    <h5>{t("Enter Flow Name")}</h5>
                     <div className="form-group">
                         <input
                             type="text"
                             value={flowName}
                             onChange={(e) => setFlowName(e.target.value)}
-                            placeholder="Flow Name"
+                            placeholder={t("Flow Name")}
                             autoFocus
                             className="form-control form--control"
                         />
@@ -266,14 +343,14 @@ function FlowBuilder() {
                             className="btn btn--dark"
                         >
                             <i className="las la-times me-2"></i>
-                            Cancel
+                            {t("Cancel")}
                         </button>
                         <button
                             onClick={handleModalSubmit}
                             className="btn btn--base"
                         >
                             <i className="lab la-telegram me-2"></i>
-                            Save
+                            {t("Save")}
                         </button>
                     </div>
                 </div>

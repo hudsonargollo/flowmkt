@@ -334,7 +334,7 @@
 
 @push('script-lib')
     <script src="{{ asset('assets/global/js/select2.min.js') }}"></script>
-    <script src="{{ asset($activeTemplateTrue . 'js/ovo-markdown.js') }}"></script>
+    <script src="{{ asset($activeTemplateTrue . 'js/flowmkt-markdown.js') }}"></script>
 @endpush
 
 @push('script')

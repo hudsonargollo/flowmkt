@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import NodeWrapper from "./NodeWrapper.jsx";
 import { Position, Handle } from "reactflow";
+import { t } from "../app.jsx";
 
 export default function SendButtonNode({ id, data, setNodes }) {
     const handles = [{ type: "target", position: Position.Left }];
@@ -39,7 +40,7 @@ export default function SendButtonNode({ id, data, setNodes }) {
 
     const handleButtonChange = (index, value) => {
         if (value.length > 20) {
-            notify("error", "The button label cannot exceed 20 characters.");
+            notify("error", t("The button label cannot exceed 20 characters."));
             return;
         }
         const updated = [...buttons];
@@ -49,7 +50,7 @@ export default function SendButtonNode({ id, data, setNodes }) {
 
     const handleBodyChange = (value) => {
         if (body.length > 1024) {
-            notify("error", "The button body cannot exceed 1024 characters.");
+            notify("error", t("The button body cannot exceed 1024 characters."));
             return;
         }
         setBody(value);
@@ -57,7 +58,7 @@ export default function SendButtonNode({ id, data, setNodes }) {
 
     const handleFooterChange = (value) => {
         if (footer.length > 60) {
-            notify("error", "The footer text cannot exceed 60 characters.");
+            notify("error", t("The footer text cannot exceed 60 characters."));
             return;
         }
         setFooter(value);
@@ -69,7 +70,7 @@ export default function SendButtonNode({ id, data, setNodes }) {
             setNodes={setNodes}
             title={
                 <h6 className="mb-0">
-                    <i className="las las la-stream"></i> Button Message
+                    <i className="las las la-stream"></i> {t("Button Message")}
                 </h6>
             }
             content={
@@ -77,7 +78,7 @@ export default function SendButtonNode({ id, data, setNodes }) {
                     <textarea
                         className="form-control form--control mb-2"
                         rows={2}
-                        placeholder="Enter message body..."
+                        placeholder={t("Enter message body...")}
                         value={body}
                         maxLength={1024}
                         onChange={(e) => handleBodyChange(e.target.value)}
@@ -86,14 +87,14 @@ export default function SendButtonNode({ id, data, setNodes }) {
                     <input
                         type="text"
                         className="form-control form--control mb-3"
-                        placeholder="Enter footer text..."
+                        placeholder={t("Enter footer text...")}
                         value={footer}
                         maxLength={60}
                         onChange={(e) => handleFooterChange(e.target.value)}
                     />
 
                     <div className="text-sm text-gray-700">
-                        <label className="d-block mb-1">Buttons (max 3)</label>
+                        <label className="d-block mb-1">{t("Buttons (max 3)")}</label>
 
                         {buttons.map((btn, index) => (
                             <div
@@ -104,7 +105,7 @@ export default function SendButtonNode({ id, data, setNodes }) {
                                 <input
                                     type="text"
                                     className="form-control form--control"
-                                    placeholder={`Button ${index + 1}`}
+                                    placeholder={`${t("Button")} ${index + 1}`}
                                     value={btn.text}
                                     maxLength={20}
                                     onChange={(e) =>
@@ -142,7 +143,7 @@ export default function SendButtonNode({ id, data, setNodes }) {
                                 onClick={addButton}
                             >
                                 <i className="las la-plus me-1"></i>
-                                Add Button
+                                {t("Add Button")}
                             </button>
                         )}
                     </div>

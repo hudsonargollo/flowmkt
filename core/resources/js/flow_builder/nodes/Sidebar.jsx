@@ -1,3 +1,5 @@
+import { t } from "../app.jsx";
+
 export default function Sidebar({ isOpen, onClose }) {
     const sidebarClass = isOpen ? "show" : "";
 
@@ -5,56 +7,56 @@ export default function Sidebar({ isOpen, onClose }) {
         {
             type: "textMessage",
             icon: "las la-envelope",
-            label: "Text Message",
-            description: "Send a simple text message to the user.",
+            label: t("Text Message"),
+            description: t("Send a simple text message to the user."),
         },
         {
             type: "sendImage",
             icon: "las la-image",
-            label: "Send Image",
-            description: "Send an image message to the user.",
+            label: t("Send Image"),
+            description: t("Send an image message to the user."),
         },
         {
             type: "sendVideo",
             icon: "las la-video",
-            label: "Video Message",
-            description: "Send a video file as a message.",
+            label: t("Video Message"),
+            description: t("Send a video file as a message."),
         },
         {
             type: "sendDocument",
             icon: "las la-file-alt",
-            label: "Document Message",
-            description: "Send a document or file to the user.",
+            label: t("Document Message"),
+            description: t("Send a document or file to the user."),
         },
         {
             type: "sendAudio",
             icon: "las la-microphone",
-            label: "Audio Message",
-            description: "Send an audio clip or voice message.",
+            label: t("Audio Message"),
+            description: t("Send an audio clip or voice message."),
         },
         {
             type: "sendList",
             icon: "las la-list",
-            label: "List Message",
-            description: "Send a structured list message with options.",
+            label: t("List Message"),
+            description: t("Send a structured list message with options."),
         },
         {
             type: "sendCtaUrl",
             icon: "las la-link",
-            label: "URL Message",
-            description: "Send a call-to-action message containing a URL.",
+            label: t("URL Message"),
+            description: t("Send a call-to-action message containing a URL."),
         },
         {
             type: "sendLocation",
             icon: "las la-map-marker-alt",
-            label: "Location Message",
-            description: "Share a location pin with the user.",
+            label: t("Location Message"),
+            description: t("Share a location pin with the user."),
         },
         {
             type: "sendButton",
             icon: "las la-stream",
-            label: "Button Message",
-            description: "Make conditional choices with a interactive buttons.",
+            label: t("Button Message"),
+            description: t("Make conditional choices with a interactive buttons."),
         },
     ];
 
@@ -65,9 +67,9 @@ export default function Sidebar({ isOpen, onClose }) {
             </button>
             <div style={{ padding: "16px" }}>
                 <div className="pb-2 border-bottom">
-                    <h5 className="m-0 p-0">Add Node</h5>
+                    <h5 className="m-0 p-0">{t("Add Node")}</h5>
                     <span className="text-muted fs-14">
-                        Drag and drop to add node
+                        {t("Drag and drop to add node")}
                     </span>
                 </div>
                 {nodeOptions.map((node) => (

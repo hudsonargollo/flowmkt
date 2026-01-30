@@ -33,6 +33,8 @@
 
 
     @stack('style')
+    {{-- FlowMkt Brand Colors: Dynamically loaded from color.php with base_color from database --}}
+    {{-- Default Primary Color: #6366f1 (Modern Indigo) --}}
     <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/color.php') }}?color={{ gs('base_color') }}">
 </head>
 @php echo loadExtension('google-analytics') @endphp

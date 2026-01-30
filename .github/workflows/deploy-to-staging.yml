@@ -1,0 +1,75 @@
+name: Deploy to Staging
+
+on:
+  push:
+    branches:
+      - staging
+      - develop
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, xml, ctype, json, bcmath, pdo, mysql
+          
+      - name: Install Composer dependencies
+        run: |
+          cd core
+          composer install --optimize-autoloader --no-interaction
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Install NPM dependencies and build assets
+        run: |
+          cd core
+          npm ci
+          npm run build
+          
+      - name: Deploy to Staging via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USERNAME }}
+          key: ${{ secrets.STAGING_SSH_KEY }}
+          port: ${{ secrets.STAGING_SSH_PORT || 22 }}
+          script: |
+            # Navigate to staging directory
+            cd ${{ secrets.STAGING_APP_PATH || 'staging' }}
+            
+            # Pull latest changes
+            git pull origin staging
+            
+            # Navigate to core directory
+            cd core
+            
+            # Install/update dependencies (with dev dependencies for staging)
+            composer install --optimize-autoloader --no-interaction
+            
+            # Install/update NPM dependencies and build
+            npm ci
+            npm run build
+            
+            # Run Laravel optimizations
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+            
+            # Run migrations (staging only)
+            php artisan migrate --force
+            
+            # Set proper permissions
+            chmod -R 755 storage bootstrap/cache
+            
+            echo "Staging deployment completed successfully!"

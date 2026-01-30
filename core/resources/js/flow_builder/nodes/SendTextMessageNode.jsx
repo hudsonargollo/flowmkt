@@ -1,4 +1,5 @@
 import NodeWrapper from "./NodeWrapper.jsx";
+import { t } from "../app.jsx";
 
 export default function SendTextMessageNode({ id, data, setNodes }) {
     const handles = data.handles || [
@@ -9,7 +10,7 @@ export default function SendTextMessageNode({ id, data, setNodes }) {
         <NodeWrapper
             id={id}
             setNodes={setNodes}
-            title={<h6 className="mb-0"> <i className="las la-envelope"></i> Text Message</h6>}
+            title={<h6 className="mb-0"> <i className="las la-envelope"></i> {t("Text Message")}</h6>}
             content={
                 <textarea
                     value={data.message || ""}
@@ -31,7 +32,7 @@ export default function SendTextMessageNode({ id, data, setNodes }) {
                     className="form-control form--control w-full"
                     cols={20}
                     rows={3}
-                    placeholder="Type your message here..."
+                    placeholder={t("Type your message here...")}
                 />
             }
             handles={handles}

@@ -19,9 +19,10 @@
     --heading-color: var(--secondary);
 
     /* ============================== Bootstrap Modifier Start ============================== */
-    --primary-h: 253;
-    --primary-s: 100%;
-    --primary-l: 61%;
+    /* FlowMkt Brand Primary Color: #6366f1 (Modern Indigo) */
+    --primary-h: 238;
+    --primary-s: 86%;
+    --primary-l: 67%;
     --primary: var(--primary-h) var(--primary-s) var(--primary-l);
     --primary-dark: var(--primary-h) var(--primary-s) calc(var(--primary-l) - var(--primary-l) * 0.2);
     --primary-light: var(--primary-h) calc(var(--primary-s)) calc(var(--primary-l) + (100% - var(--primary-l)) * 0.2);
@@ -62,9 +63,10 @@
 }
 
 [data-theme=dark] {
-    --primary-h: 247;
-    --primary-s: 100%;
-    --primary-l: 76%;
+    /* FlowMkt Brand Primary Color for Dark Mode: Lighter variant of #6366f1 */
+    --primary-h: 238;
+    --primary-s: 86%;
+    --primary-l: 75%;
     /* primary color For dark */
     --secondary-h: 0;
     --secondary-s: 0%;

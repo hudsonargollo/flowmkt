@@ -125,12 +125,12 @@
         tempTextArea.setSelectionRange(0, 99999);
 
         navigator.clipboard.writeText(text).then(function () {
-            $this.html(`<i class="las la-check-double fw-bold me-2"></i> Copied`);
+            $this.html(`<i class="las la-check-double fw-bold me-2"></i> Copiado`);
             setTimeout(function () {
                 $this.html(oldHtml);
             }, 1500);
         }).catch(function (error) {
-            console.error('Copy failed!', error);
+            console.error('Falha ao copiar!', error);
         });
 
         document.body.removeChild(tempTextArea);
@@ -146,7 +146,7 @@
         const formattedSupportedFiles = supportedFiles.map(supportedFile => `image/${supportedFile.replace('.', '').replace(' ', '')}`);
 
         if (!formattedSupportedFiles.includes(file.type)) {
-            notify('error', 'The uploaded file format is not supported.');
+            notify('error', 'O formato do arquivo enviado não é suportado.');
             return;
         }
 
@@ -170,7 +170,7 @@
         const files = e.originalEvent.dataTransfer.files;
 
         if (files.length > 1) {
-            notify('error', 'Only one file can be uploaded at a time');
+            notify('error', 'Apenas um arquivo pode ser enviado por vez');
             return;
         }
         $imageInput[0].files = e.originalEvent.dataTransfer.files;

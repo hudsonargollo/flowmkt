@@ -25,7 +25,7 @@
 
                                 </div>
 
-                                <x-ovo-form identifier="id" identifierValue="{{ $gateway->form_id }}" />
+                                <x-flowmkt-form identifier="id" identifierValue="{{ $gateway->form_id }}" />
 
                                 <div class="col-md-12">
                                     <div class="form-group">

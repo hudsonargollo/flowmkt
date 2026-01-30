@@ -12,6 +12,9 @@ class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
+     * 
+     * FlowMkt Branding: This provider uses dynamic configuration via gs() helper.
+     * No hardcoded brand references - all branding pulled from database.
      */
     public function register(): void
     {

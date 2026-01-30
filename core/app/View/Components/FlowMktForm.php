@@ -5,7 +5,7 @@ namespace App\View\Components;
 use App\Models\Form;
 use Illuminate\View\Component;
 
-class OvoForm extends Component
+class FlowMktForm extends Component
 {
     /**
      * Create a new component instance.
@@ -33,6 +33,6 @@ class OvoForm extends Component
      */
     public function render()
     {
-        return view('components.ovo-form');
+        return view('components.flowmkt-form');
     }
 }

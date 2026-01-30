@@ -38,7 +38,7 @@
 
         $submitBtn.addClass('disabled').attr("disabled", true).html(`
             <div class="button-loader d-flex gap-2 flex-wrap align-items-center justify-content-center">
-                <div class="spinner-border"></div><span>Loading...</span>
+                <div class="spinner-border"></div><span>Carregando...</span>
             </div>
         `);
 

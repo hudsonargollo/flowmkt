@@ -2,6 +2,7 @@ import { useState } from "react";
 import NodeWrapper from "./NodeWrapper.jsx";
 import { Position } from "reactflow";
 import { uploadMedia } from "../uploadMedia.js";
+import { t } from "../app.jsx";
 
 export default function SendVideoNode({ id, data, setNodes }) {
     const handles = data.handles || [
@@ -54,7 +55,7 @@ export default function SendVideoNode({ id, data, setNodes }) {
             setNodes={setNodes}
             title={
                 <h6 className="mb-0">
-                    <i className="las la-video"></i> Send Video
+                    <i className="las la-video"></i> {t("Send Video")}
                 </h6>
             }
             content={
@@ -65,8 +66,8 @@ export default function SendVideoNode({ id, data, setNodes }) {
                         ) : (
                             <span style={{ color: "#999" }}>
                                 {isRequesting
-                                    ? "Uploading..."
-                                    : "No video selected"}
+                                    ? t("Uploading...")
+                                    : t("No video selected")}
                             </span>
                         )}
                     </div>

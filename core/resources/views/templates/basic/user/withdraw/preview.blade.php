@@ -22,7 +22,7 @@
                                     echo $withdraw->method->description;
                                 @endphp
                             </div>
-                            <x-ovo-form identifier="id" identifierValue="{{ $withdraw->method->form_id }}" />
+                            <x-flowmkt-form identifier="id" identifierValue="{{ $withdraw->method->form_id }}" />
                             @if (auth()->user()->ts)
                                 <div class="form-group">
                                     <label>@lang('Google Authenticator Code')</label>

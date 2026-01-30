@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Position } from "reactflow";
 import NodeWrapper from "./NodeWrapper";
 import axios from "axios";
+import { t } from "../app.jsx";
 
 export default function SendTemplateNode({ id, data, setNodes }) {
     const handles = data.handles || [
@@ -140,7 +141,7 @@ export default function SendTemplateNode({ id, data, setNodes }) {
             setNodes={setNodes}
             title={
                 <h6 className="mb-0">
-                    <i className="las la-link"></i> Send Template
+                    <i className="las la-link"></i> {t("Send Template")}
                 </h6>
             }
             content={
@@ -165,13 +166,13 @@ export default function SendTemplateNode({ id, data, setNodes }) {
                             {Object.keys(headerVars).length > 0 && (
                                 <div className="mb-2">
                                     <h6 className="m-0 variable-title">
-                                        Header Variables
+                                        {t("Header Variables")}
                                     </h6>
                                     {Object.keys(headerVars).map((key) => (
                                         <input
                                             key={key}
                                             className="form-control form--control my-1"
-                                            placeholder={`Value for ${key}`}
+                                            placeholder={`${t("Value for")} ${key}`}
                                             value={headerVars[key]}
                                             onChange={(e) =>
                                                 updateHeaderVar(
@@ -187,13 +188,13 @@ export default function SendTemplateNode({ id, data, setNodes }) {
                             {Object.keys(bodyVars).length > 0 && (
                                 <div>
                                     <h6 className="m-0 variable-title">
-                                        Body Variables
+                                        {t("Body Variables")}
                                     </h6>
                                     {Object.keys(bodyVars).map((key) => (
                                         <input
                                             key={key}
                                             className="form-control form--control my-1"
-                                            placeholder={`Value for ${key}`}
+                                            placeholder={`${t("Value for")} ${key}`}
                                             value={bodyVars[key]}
                                             onChange={(e) =>
                                                 updateBodyVar(
@@ -207,7 +208,7 @@ export default function SendTemplateNode({ id, data, setNodes }) {
                             )}
                         </>
                     ) : (
-                        <span className="no-data">No data found</span>
+                        <span className="no-data">{t("No data found")}</span>
                     )}
                 </div>
             }

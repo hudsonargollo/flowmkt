@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import NodeWrapper from "./NodeWrapper.jsx";
 import { Position } from "reactflow";
 import axios from "axios";
+import { t } from "../app.jsx";
 
 export default function SendListMessageNode({ id, data, setNodes }) {
     const handles = [{ type: "target", position: Position.Left }];
@@ -61,7 +62,7 @@ export default function SendListMessageNode({ id, data, setNodes }) {
             setNodes={setNodes}
             title={
                 <h6 className="mb-0">
-                    <i className="las la-list"></i> Interactive List
+                    <i className="las la-list"></i> {t("Interactive List")}
                 </h6>
             }
             handles={handles}
@@ -80,7 +81,7 @@ export default function SendListMessageNode({ id, data, setNodes }) {
                             ))}
                         </select>
                     ) : (
-                        <span className="no-data">No data found</span>
+                        <span className="no-data">{t("No data found")}</span>
                     )}
                 </div>
             }

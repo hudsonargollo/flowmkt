@@ -1,0 +1,72 @@
+name: Deploy to cPanel
+
+on:
+  push:
+    branches:
+      - main
+      - production
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, xml, ctype, json, bcmath, pdo, mysql
+          
+      - name: Install Composer dependencies
+        run: |
+          cd core
+          composer install --no-dev --optimize-autoloader --no-interaction
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Install NPM dependencies and build assets
+        run: |
+          cd core
+          npm ci
+          npm run build
+          
+      - name: Deploy to cPanel via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.CPANEL_HOST }}
+          username: ${{ secrets.CPANEL_USERNAME }}
+          key: ${{ secrets.CPANEL_SSH_KEY }}
+          port: ${{ secrets.CPANEL_SSH_PORT || 22 }}
+          script: |
+            # Navigate to your application directory
+            cd ${{ secrets.CPANEL_APP_PATH || 'public_html' }}
+            
+            # Pull latest changes from GitHub
+            git pull origin main
+            
+            # Navigate to core directory
+            cd core
+            
+            # Install/update Composer dependencies
+            composer install --no-dev --optimize-autoloader --no-interaction
+            
+            # Install/update NPM dependencies and build
+            npm ci
+            npm run build
+            
+            # Run Laravel optimizations
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+            
+            # Set proper permissions
+            chmod -R 755 storage bootstrap/cache
+            
+            echo "Deployment completed successfully!"

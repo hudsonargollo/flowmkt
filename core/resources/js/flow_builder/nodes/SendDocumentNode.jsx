@@ -2,6 +2,7 @@ import { useState } from "react";
 import NodeWrapper from "./NodeWrapper.jsx";
 import { Position } from "reactflow";
 import { uploadMedia } from "../uploadMedia.js";
+import { t } from "../app.jsx";
 
 export default function SendDocumentNode({ id, data, setNodes }) {
     const handles = data.handles || [
@@ -10,7 +11,7 @@ export default function SendDocumentNode({ id, data, setNodes }) {
     ];
 
     const [fileName, setFileName] = useState(
-        data.documentName || "No document selected"
+        data.documentName || t("No document selected")
     );
     const [isRequesting, setIsRequesting] = useState(false);
 
@@ -50,12 +51,12 @@ export default function SendDocumentNode({ id, data, setNodes }) {
             setNodes={setNodes}
             title={
                 <h6 className="mb-0">
-                    <i className="las la-file-alt"></i> Send Document
+                    <i className="las la-file-alt"></i> {t("Send Document")}
                 </h6>
             }
             content={
                 <div className="document-node">
-                    <div>{isRequesting ? "Uploading..." : fileName}</div>
+                    <div>{isRequesting ? t("Uploading...") : fileName}</div>
 
                     <input
                         type="file"

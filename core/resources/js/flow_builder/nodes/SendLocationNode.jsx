@@ -1,6 +1,7 @@
 import { useState } from "react";
 import NodeWrapper from "./NodeWrapper.jsx";
 import { Position } from "reactflow";
+import { t } from "../app.jsx";
 
 export default function SendLocationNode({ id, data, setNodes }) {
     const handles = data.handles || [
@@ -28,12 +29,12 @@ export default function SendLocationNode({ id, data, setNodes }) {
         <NodeWrapper
             id={id}
             setNodes={setNodes}
-            title={<h6 className="mb-0"> <i className="las la-map-marker-alt"></i> Send Location</h6>}
+            title={<h6 className="mb-0"> <i className="las la-map-marker-alt"></i> {t("Send Location")}</h6>}
             content={
                 <div className="text-sm text-gray-700 space-y-2">
                     <input
                         type="text"
-                        placeholder="Latitude"
+                        placeholder={t("Latitude")}
                         className="form-control form--control mb-2"
                         value={locationData.latitude}
                         onChange={(e) =>
@@ -42,7 +43,7 @@ export default function SendLocationNode({ id, data, setNodes }) {
                     />
                     <input
                         type="text"
-                        placeholder="Longitude"
+                        placeholder={t("Longitude")}
                         className="form-control form--control"
                         value={locationData.longitude}
                         onChange={(e) =>

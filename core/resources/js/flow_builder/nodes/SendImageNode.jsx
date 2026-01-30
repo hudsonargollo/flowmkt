@@ -2,6 +2,7 @@ import { useState } from "react";
 import NodeWrapper from "./NodeWrapper.jsx";
 import { Position } from "reactflow";
 import { uploadMedia } from "../uploadMedia.js";
+import { t } from "../app.jsx";
 
 export default function SendImageNode({ id, data, setNodes }) {
     const handles = data.handles || [
@@ -50,18 +51,18 @@ export default function SendImageNode({ id, data, setNodes }) {
             setNodes={setNodes}
             title={
                 <h6 className="mb-0">
-                    <i className="las la-image"></i> Send Image
+                    <i className="las la-image"></i> {t("Send Image")}
                 </h6>
             }
             content={
                 <div className="image-node">
                     {preview ? (
-                        <img src={preview} alt="Preview" />
+                        <img src={preview} alt={t("Preview")} />
                     ) : (
                         <span style={{ color: "#999" }}>
                             {isRequesting
-                                ? "Uploading..."
-                                : "No Image Selected"}
+                                ? t("Uploading...")
+                                : t("No Image Selected")}
                         </span>
                     )}
 
